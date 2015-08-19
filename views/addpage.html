@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<form action='/add/submit' method='post'>
+  <div class="form-group">
+    <label for="pageTitle">Page Title</label>
+    <input type="text" class="form-control"  name="pageTitle"  id="pageTitle" placeholder="Name">
+  </div>
+  <div class="form-group">
+    <label for="pageContent">Page Content</label>
+    <textarea name="pageContent" id="pageContent" class="form-control"></textarea>
+  </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+{% endblock %}

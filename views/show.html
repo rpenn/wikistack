@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  {% if doc.content %}
+    <h1>{{doc.title}}</h1>
+    <hr>
+    {{ doc.content|markedContent }}
+  {% else %}
+    URL not found
+  {% endif %}
+{% endblock %}

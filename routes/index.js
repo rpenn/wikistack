@@ -6,7 +6,6 @@ var models = require('../models/');
 router.get('/', function(req, res, next) {
   //res.render('index', { title: 'Express' });
   models.Page.find(function(err,docs){
-  	console.log(docs);
   	res.render('index.html', {title: "Wikistack", docs: docs});
   })
 });

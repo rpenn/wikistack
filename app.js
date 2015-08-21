@@ -1,5 +1,6 @@
 var addRoutes = require('./routes/add');
 var wikiroutes = require('./routes/wikiroutes');
+var tags = require('./routes/tags');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -34,6 +35,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/add', addRoutes);
 app.use('/wiki', wikiroutes);
+app.use('/tags', tags);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -43,28 +45,27 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
+//development error handler
+//will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+}
 
-// development error handler
-// will print stacktrace
-// if (app.get('env') === 'development') {
-//   app.use(function(err, req, res, next) {
-//     res.status(err.status || 500);
-//     res.render('error', {
-//       message: err.message,
-//       error: err
-//     });
-//   });
-// }
-
-// production error handler
-// no stacktraces leaked to user
-// app.use(function(err, req, res, next) {
-//   res.status(err.status || 500);
-//    res.render('error', {
-//     message: err.message,
-//     error: {}
-//   });
-// });
+//production error handler
+//no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+   res.render('error', {
+    message: err.message,
+    error: {}
+  });
+});
 
 
 module.exports = app;

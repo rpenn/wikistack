@@ -11,7 +11,8 @@ var pageSchema = new mongoose.Schema({
   owner_id: String,
   content:  String,
   date:     { type: Date, default: Date.now },
-  status:   Number
+  status:   Number,
+  tags:     [String]
 });
 
 var userSchema = new mongoose.Schema({
@@ -25,6 +26,7 @@ pageSchema.virtual('full_url').get(function() {
 
 var Page = mongoose.model('Page', pageSchema);
 var User = mongoose.model('User', userSchema);
+
 
 module.exports = {
   Page: Page,

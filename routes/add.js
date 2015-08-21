@@ -12,8 +12,11 @@ router.post('/submit', function(req, res) {
   // add definitions of the `title`, `content` and `url_name` variables here
   var title = req.body.pageTitle;
   var content = req.body.pageContent;
+	var tags = req.body.pageTags;
+	var tagsArr = tags.split(",");
+	tagsArr = tagsArr.map(function(tag){return tag.trim();})
   // var url = title.replace(/[^a-zA-Z\d\s:]/g, "");
- 
+
 	var generateUrlName = function(title) {
 	  if (typeof title != "undefined" && title !== "") {
 	    // Removes all non-alphanumeric characters from title
@@ -26,8 +29,7 @@ router.post('/submit', function(req, res) {
 	};
 
   var url_name = generateUrlName(title);
-  console.log(url_name);
-  var page = new models.Page({ 'title': title, 'content': content, 'url_name': url_name });
+  var page = new models.Page({ 'title': title, 'content': content, 'url_name': url_name, 'tags': tagsArr });
   page.save();
   res.redirect('/add');
 });

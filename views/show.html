@@ -5,6 +5,10 @@
     <h1>{{doc.title}}</h1>
     <hr>
     {{ doc.content|markedContent }}
+    <br><br>Tags:
+    {% for tag in doc.tags %}
+      {{tag}}
+    {% endfor %}
   {% else %}
     URL not found
   {% endif %}

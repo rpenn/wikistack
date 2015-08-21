@@ -1,6 +1,5 @@
 // Setting custom filters on Swig
 var marked = require('marked');
-console.log(marked('I am using __markdown__.'));
 
 module.exports = function(swig) {
   var page_link = function (doc) {
@@ -13,6 +12,17 @@ module.exports = function(swig) {
     return "<a href='"+doc.full_url+"'>"+link_name+"</a>";
   };
   page_link.safe = true;
+
+  marked.setOptions({
+    renderer: new marked.Renderer(),
+    gfm: true,
+    tables: true,
+    breaks: false,
+    pedantic: false,
+    sanitize: true,
+    smartLists: true,
+    smartypants: false
+  });
 
   var markedContent = function(unformattedTxt){
     return marked(unformattedTxt);
